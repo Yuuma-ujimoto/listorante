@@ -11,6 +11,7 @@ const routes: Array<RouteRecordRaw> = [
     component:()=>import("../views/shopListView.vue"),
     name:"shop list"
   }
+  
 ]
 
 const router = createRouter({

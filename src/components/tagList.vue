@@ -45,7 +45,7 @@ export default defineComponent({
         isDeleteTagModalOpen: false,
         tagName: "",
         deleteTagId: null,
-        InComponentTagList:[]
+        InComponentTagList: []
       } as TagListData
     }
   },
@@ -53,19 +53,10 @@ export default defineComponent({
     StatusTagList: {
       type: Array as any
     },
-    // SuggestTagList: {
-    //   type: Array,
-    //   default:[]
-    // }    // SuggestTagList: {
-    //   type: Array,
-    //   default:[]
-    // }
   },
-  watch:{
-    StatusTagList(){
-      console.log("c")
-      console.log(this.StatusTagList)
-      this.TagListData.InComponentTagList  = this.StatusTagList
+  watch: {
+    StatusTagList() {
+      this.TagListData.InComponentTagList = this.StatusTagList
     }
   },
   computed: {
@@ -88,9 +79,9 @@ export default defineComponent({
     },
     addTag: async function () {
       const axiosUrl = BaseURL + "/tag/add"
-      const shopId:string|string[] = this.$route.params.id
+      const shopId: string | string[] = this.$route.params.id
       try {
-        if (typeof shopId!=="string"){
+        if (typeof shopId !== "string") {
           return
         }
         const shopNumId: number = parseInt(shopId)
@@ -103,15 +94,15 @@ export default defineComponent({
         const axiosResult = await axios.post(axiosUrl, axiosParams)
         console.log(axiosResult)
         this.TagListData.isAddTagModalOpen = false
-        const tagId:number|null = axiosResult.data.TagId
-        this.TagListData.InComponentTagList.push({tag_name:this.TagListData.tagName,tag_id:tagId}as tagData)
+        const tagId: number | null = axiosResult.data.TagId
+        this.TagListData.InComponentTagList.push({tag_name: this.TagListData.tagName, tag_id: tagId} as tagData)
         this.TagListData.tagName = ""
       } catch (e) {
         console.log(e)
         return
       }
     },
-    deleteTagModalOpen(tagId: number|null):void{
+    deleteTagModalOpen(tagId: number | null): void {
 
       this.TagListData.isDeleteTagModalOpen = true
       this.TagListData.deleteTagId = tagId
@@ -123,7 +114,7 @@ export default defineComponent({
     //
     //   }
     // },
-    closeModal: function ():void {
+    closeModal: function (): void {
       this.TagListData.isDeleteTagModalOpen = false
       this.TagListData.isAddTagModalOpen = false
       this.TagListData.deleteTagId = null
